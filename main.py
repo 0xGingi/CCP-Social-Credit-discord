@@ -52,7 +52,7 @@ user = bot.fetch_user(DISID)
 async def on_ready():
     print(f"Logged in as {bot.user}")
     user = await bot.fetch_user(DISID)
-    await user.send('Bot is working ish')
+    await user.send('请立即到离你最近的劳教所报到')
 
 
 ##Word suggest commands
@@ -82,7 +82,7 @@ async def get_credit(ctx):
     auth = str(ctx.author)
     value = social_credits.get(auth)
     print(auth)
-    await ctx.respond('You have %s social credit' % (value), ephemeral=True)
+    await ctx.respond('You have %s social credit 社会信用' % (value), ephemeral=True)
 
 ##Leaderboard command
 @bot.slash_command(name="leaderboard", description="Show global social credit rankings")
@@ -100,12 +100,12 @@ async def leaderboard(ctx):
 ##Re-educaiton camp
 @bot.slash_command(name="reeducation", description="Please report to the nearest reeducation camp immediately")
 async def reeducation(ctx):
-    await ctx.respond('Please report to your nearest reeducation camp immediately')
+    await ctx.respond('请立即到离你最近的劳教所报到. Please report to your nearest reeducation camp immediately.')
 
 ##eatbug
 @bot.slash_command(name="eatbug", description="Eat the bug. Yum Yum.")
 async def eatbug(ctx):
-    await ctx.respond('Eat the bug. Yum Yum.')
+    await ctx.respond('吃虫子百胜 Eat the bug. Yum Yum.')
 
 ##Gaslight
 @bot.slash_command(name="gaslight", description="Gaslight")
@@ -140,9 +140,9 @@ async def on_message(message): #usual check it's not the bot yada yada
     if (set(bad) & set(words)): #bad response
         neg = [
             'You must report to the nearest reeducation camp immediately',
-            #' ',
+            '请立即到离你最近的劳教所报到',
             'This is not correct',
-            #' ',
+            '坏公民',
             '*Hits with gun*',
         ]
         response = random.choice(neg)
@@ -159,7 +159,7 @@ async def on_message(message): #usual check it's not the bot yada yada
             social_credits.update({authr: value})
             scdiff = social_credits
             print(scdiff)
-            await message.channel.send('-100 Social Credits')
+            await message.channel.send('-100 Social Credits 坏公民')
             with open('data.json', 'w') as fp:
                 json.dump(scdiff, fp)
             return
@@ -177,6 +177,7 @@ async def on_message(message): #usual check it's not the bot yada yada
             'Keep doing your part!',
             '*Tips hat*',
             '*Smiles and nods*',
+            '好公民'
         ]
         response = random.choice(pos)
         await message.channel.send(response)
@@ -191,7 +192,7 @@ async def on_message(message): #usual check it's not the bot yada yada
             social_credits.update({authr: value})
             scdiff = social_credits
             print(scdiff)
-            await message.channel.send('+100 Social Credit')
+            await message.channel.send('+100 Social Credit 好公民')
             with open('data.json', 'w') as fp:
                 json.dump(scdiff, fp)
             return
