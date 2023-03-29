@@ -31,23 +31,6 @@ punctuation = ['!', '?', '.', ',', '`', '~', '@', '#', '$', '%', '&', '*', '(', 
 
 user = bot.fetch_user(DISID)
 
-##Failed attempt at geting cool buttons to work, may revisit
-
-##class MyView(discord.ui.View):
-
-   ##@discord.ui.button(label='Good', style=discord.ButtonStyle.primary)
-    ##async def first_button_callback(self, button, interaction, goodness):
-        ##await interaction.response.send_message('You selected good', ephemeral=True)
-        ##goodness = 'good'
-
-
-
-    ##@discord.ui.button(label='Bad', style=discord.ButtonStyle.primary)
-    ##async def second_button_callback(self, button, interaction, goodness):
-        ##await interaction.response.send_message('You selected bad', ephemeral=True)
-        ##goodness = 'bad'
-
-
 @bot.event
 async def on_ready():
     print(f"Logged in as {bot.user}")
@@ -207,4 +190,4 @@ async def on_message(message): #usual check it's not the bot yada yada
             return
 
 
-bot.run(TOKEN) #RUUUUUUUUUUNNNNNNNNNNNNN
+bot.run(TOKEN) #社会信用体系启动
