@@ -14,6 +14,7 @@ suggestion = ''
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
+DISID = os.getenv('DISCORD_ID')
 bot = discord.Bot(intents=intents)
 
 with open('data.json', 'r') as fp:
@@ -28,7 +29,7 @@ with open('good.json', 'r') as fp:
 
 punctuation = ['!', '?', '.', ',', '`', '~', '@', '#', '$', '%', '&', '*', '(', ')']
 
-user = bot.fetch_user('351859727568994314')
+user = bot.fetch_user(DISID)
 
 ##Failed attempt at geting cool buttons to work, may revisit
 
@@ -50,7 +51,7 @@ user = bot.fetch_user('351859727568994314')
 @bot.event
 async def on_ready():
     print(f"Logged in as {bot.user}")
-    user = await bot.fetch_user('351859727568994314')
+    user = await bot.fetch_user(DISID)
     await user.send('Bot is working ish')
 
 
@@ -61,7 +62,7 @@ async def suggest(ctx, suggestion = discord.Option(name='suggestion')):
     suggestion = suggestion
     suggestions = suggestion
     await ctx.response.send_message('You suggested %s' % suggestion, ephemeral=True)
-    user = await bot.fetch_user('351859727568994314')
+    user = await bot.fetch_user(DISID)
     await user.send('Good Suggestion: %s' % suggestions)
 
 @bot.slash_command(name="suggest_bad", description="Suggest new bad words to detect!")
@@ -70,7 +71,7 @@ async def suggest(ctx, suggestion = discord.Option(name='suggestion')):
     suggestion = suggestion
     suggestions = suggestion
     await ctx.response.send_message('You suggested %s' % suggestion, ephemeral=True)
-    user = await bot.fetch_user('351859727568994314')
+    user = await bot.fetch_user(DISID)
     await user.send('Bad Suggestion: %s' % suggestions)
 
 
