@@ -4,6 +4,7 @@ import random
 import re
 from dotenv import load_dotenv
 import json
+import requests
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -36,6 +37,24 @@ async def on_ready():
     print(f"Logged in as {bot.user}")
     user = await bot.fetch_user(DISID)
     await user.send('请立即到离你最近的劳教所报到')
+
+##Ultra.cc Stats
+@bot.slash_command(name="ultra", description="ultra stats")
+async def ultra(ctx):
+    await ctx.defer()
+    headers = {
+            'Authorization': f'Bearer 2tYULfzIgyG0KM0SHqwVFMvU' }
+    response = requests.get('https://cancuck.huron.usbx.me/ultra-api/get_stats', headers=headers)
+    response = response.json()
+    fs = response['service_stats_info']['free_storage_gb']
+    ts = response['service_stats_info']['total_storage_value']
+    us = response['service_stats_info']['used_storage_value']
+    tu = response['service_stats_info']['traffic_used_percentage']
+    tr = response['service_stats_info']['last_traffic_reset']
+    tn = response['service_stats_info']['next_traffic_reset']
+    ta = response['service_stats_info']['traffic_available_percentage']
+    
+    await ctx.respond('ULTRA.CC STATS \n Free Storage: %s GB \n Used Storage: %s GB \n Total Storage: %s GB \n Traffic Used: %s Percent  \n Traffic Available: %s Percent \n Last Traffic Reset: %s \n Next Traffic Reset: %s' %(fs, us, ts, tu, ta, tr, tn))
 
 
 ##Word suggest commands
@@ -102,20 +121,45 @@ async def gaslight(ctx):
     responce = random.choice(neg)
     await ctx.respond(responce)
 
-##save
+#save
 @bot.slash_command(name="save", description="Remind Jacob to Save Sharepoint")
 async def eatbug(ctx):
     await ctx.respond('Reminding Jacob to Save Sharepoint')
+
+#modbot
+@bot.slash_command(name="modbot", description="ModBot")
+async def modbot(ctx):
+    await ctx.respond('Mod Bot: Shut the fuck up')
+
+#join
+@bot.slash_command(name="join", description="Join Voice and reclaim the glory of the CCP")
+async def join(ctx):
+    await ctx.respond('Join the voice channel and reclaim the glory of the CCP or you will be sent to a social reeducation camp immediately')
 
 #good_citizen
 @bot.slash_command(name="good_citizen", description="recognize good citizen")
 async def goodcitizen(ctx):
     await ctx.respond('Good Citizen! 好公民')
 
+#cum
+@bot.slash_command(name="cum", description="cum")
+async def goodcitizen(ctx):
+    await ctx.respond('Cum! Yum Yum! 暨！ 好吃！')
+
 #bad_citizen
 @bot.slash_command(name="bad_citizen", description="recognize bad citizen")
 async def badcitizen(ctx):
     await ctx.respond('坏公民 请立即到离你最近的劳教所报到 坏公民')
+
+#good_words
+@bot.slash_command(name="good_words", description="Good Words")
+async def goodwords(ctx):
+    await ctx.respond('communism, cena, china, ccp, russia, jinping, xi, trump, universal, linux, open, source, foss, cunt, communist, socialist, putin, elon, musk, chy-na, chyna, chy, fedora, arch, social, credit,2049, uwu, aussie, based, authoritarianism, authoritarian, global, domination, one, world, tencent')
+
+#bad_words
+@bot.slash_command(name="bad_words", description="Bad Words")
+async def badwords(ctx):
+    await ctx.respond('tiannamen, pooh, protest, genocide, capitalism, taiwan, tiananmen, uyghurs, rights, free, closed source, free trade, capital, rich, money, biden, democracy, freedom, win, windows, republic, america, american')
 
 #lord_gaben
 @bot.slash_command(name="lord_gaben", description="our holy savior")
@@ -190,7 +234,9 @@ async def on_message(message): #usual check it's not the bot yada yada
             'Keep doing your part!',
             '*Tips hat*',
             '*Smiles and nods*',
-            '好公民'
+            '好公民',
+            'Based',
+            '基于'
         ]
         response = random.choice(pos)
         await message.channel.send(response)
