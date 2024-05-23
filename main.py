@@ -54,7 +54,7 @@ async def ultra(ctx):
     tn = response['service_stats_info']['next_traffic_reset']
     ta = response['service_stats_info']['traffic_available_percentage']
     
-    await ctx.respond('ULTRA.CC STATS \n Free Storage: %s GB \n Used Storage: %s GB \n Total Storage: %s GB \n Traffic Used: %s Percent  \n Traffic Available: %s Percent \n Last Traffic Reset: %s \n Next Traffic Reset: %s' %(fs, us, ts, tu, ta, tr, tn))
+    await ctx.respond('**ULTRA.CC STATS** \n Free Storage: **%s** **GB** \n Used Storage:  **%s GB** \n Total Storage: **%s GB** \n Traffic Used: **%s** \n Traffic Available: **%s** \n Last Traffic Reset: **%s** \n Next Traffic Reset: **%s**' %(fs, us, ts, tu, ta, tr, tn))
 
 
 ##Word suggest commands
