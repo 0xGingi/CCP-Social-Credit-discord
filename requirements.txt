@@ -1,3 +1,4 @@
 discord.py==2.2.2
 python-dotenv
+aiohttp>=3.9.4 # not directly required, pinned by Snyk to avoid a vulnerability
 py-cord===2.2.2
