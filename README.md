@@ -6,7 +6,7 @@ DISCLAIMER: The terms in the "good" and "bad" field here are meant to mock the C
 ```
 mkdir ~/cpp (We need a path for .env and data.json so it's persistent)
 docker pull 0xgingi/ccp-social-credit-discord:latest
-docker run -d --name ccp --restart=always -v ~/ccp:/app 0xgingi/ccp-social-credit-discord:latest
+docker run -d --name ccp --restart=always -v ~/ccp:/app/config 0xgingi/ccp-social-credit-discord:latest
 ```
 
 ## Installation (Ubuntu Server):
@@ -21,6 +21,7 @@ Add Your Discord Bot Secret Token and your Discord ID:
 
 (To get your Discord ID, enable developer mode in advanced settings then right click your name and copy ID)
 ```
+cd config
 mv .example.env .env
 nano .env 
 ```
