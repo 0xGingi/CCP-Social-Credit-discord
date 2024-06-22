@@ -68,8 +68,8 @@ client.on('interactionCreate', async interaction => {
         const value = socialCredits[author] || 0;
         await interaction.reply({ content: `You have ${value} social credit 社会信用`, ephemeral: true });
     } else if (commandName === 'leaderboard') {
-        const leaderboard = Object.entries(socialCredits).sort((a, b) => b[1] - a[1]).map(([user, score], i) => `${i + 1}. ${user}: ${score}`).join('\'\n'); 
-        await interaction.reply({ content: `**Leaderboard**\n${leaderboard}`, ephemeral: true }); 
+        const leaderboard = Object.entries(socialCredits).sort((a, b) => b[1] - a[1]).map(([user, score], i) => `${i + 1}. ${user}: ${score}`).join('\n');
+        await interaction.reply({ content: `**Leaderboard**\n${leaderboard}`, ephemeral: true });
     } else if (commandName === 'reeducation') { 
         await interaction.reply('请立即到离你最近的劳教所报到. Please report to your nearest reeducation camp immediately.'); 
     } else if (commandName === 'eatbug') { 
@@ -127,7 +127,7 @@ client.on('interactionCreate', async interaction => {
             const tn = response.data.service_stats_info.next_traffic_reset;
             const ta = response.data.service_stats_info.traffic_available_percentage;
 
-            await interaction.reply(`**ULTRA.CC STATS** \n Free Storage: **${fs}** **GB** \n Used Storage:  **${us} GB** \n Total Storage: **${ts} GB** \n Traffic Used: **${tu}** \n Traffic Available: **${ta}** \n Last Traffic Reset: **${tr}** \n Next Traffic Reset: **${tn}`);
+            await interaction.reply(`**ULTRA.CC STATS** \n Free Storage: **${fs}** **GB** \n Used Storage:  **${us} GB** \n Total Storage: **${ts} GB** \n Traffic Used: **${tu}%** \n Traffic Available: **${ta}%** \n Last Traffic Reset: **${tr}** \n Next Traffic Reset: **${tn}**`);
         } catch (error) {
             console.error(error);
             await interaction.reply('An error occurred while fetching the stats.');
