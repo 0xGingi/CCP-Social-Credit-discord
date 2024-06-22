@@ -1,6 +1,6 @@
-FROM python:3.11-slim
-RUN apt-get update && apt-get install -y git
-WORKDIR /
-ADD . /
-RUN pip install --no-cache-dir -r requirements.txt
-CMD ["python", "main.py"]
+FROM node:latest
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+CMD ["npm", "start"]
