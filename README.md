@@ -21,6 +21,7 @@ Add Your Discord Bot Secret Token and your Discord ID:
 
 (To get your Discord ID, enable developer mode in advanced settings then right click your name and copy ID)
 ```
+cd config
 mv .example.env .env
 nano .env 
 ```
