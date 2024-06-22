@@ -1,8 +1,14 @@
 # CCP-Social-Credit-discord
 A simple bot that mocks the CCP's Social credit system.
 DISCLAIMER: The terms in the "good" and "bad" field here are meant to mock the CCP and in no way reflect the views of the author
+## Docker
+```
+mkdir ~/cpp (We need a path for .env and data.json so it's persistent)
+docker pull 0xgingi/ccp-social-credit-discord:latest
+docker run -d --name ccp --restart=always -v ~/ccp:/app/config 0xgingi/ccp-social-credit-discord:latest
+```
 
-Installation (Ubuntu Server):
+## Installation (Ubuntu Server):
 ```
 sudo apt install git python3 python3-pip
 ```
