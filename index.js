@@ -5,11 +5,14 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const axios = require('axios');
-require('dotenv').config();
+const dotenv = require('dotenv');
+const path = require('path');
+
+dotenv.config({ path: path.join(__dirname, 'config', '.env') });
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
-const socialCredits = JSON.parse(fs.readFileSync('./data.json', 'utf8'));
+const socialCredits = JSON.parse(fs.readFileSync('./config/data.json', 'utf8'));
 const bad = JSON.parse(fs.readFileSync('./bad.json', 'utf8'));
 const good = JSON.parse(fs.readFileSync('./good.json', 'utf8'));
 
@@ -151,7 +154,7 @@ client.on('messageCreate', async message => { if (message.author.bot) return;
             message.channel.send('Social credit account created, you have 1500 social credit');
         }
     
-        fs.writeFileSync('./data.json', JSON.stringify(socialCredits));
+        fs.writeFileSync('./config/data.json', JSON.stringify(socialCredits));
     }
     
     if (words.some(word => good.includes(word))) {
@@ -168,6 +171,6 @@ client.on('messageCreate', async message => { if (message.author.bot) return;
             message.channel.send('Social credit account created, you have 1700 social credit');
         }
     
-        fs.writeFileSync('./data.json', JSON.stringify(socialCredits)); } });
+        fs.writeFileSync('./config/data.json', JSON.stringify(socialCredits)); } });
 
 client.login(process.env.DISCORD_TOKEN);

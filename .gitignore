@@ -1,3 +1,5 @@
 .env
 data.json
 node_modules/
+config/.env
+config/data.json
