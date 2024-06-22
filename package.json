@@ -1,0 +1,15 @@
+{
+    "name": "ccp-social-credit-discord",
+    "version": "1.0.0",
+    "description": " A simple bot that mocks the CCP ",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js"
+    },
+    "dependencies": {
+      "discord.js": "^14.15.3",
+      "dotenv": "^16.4.5",
+      "axios": "^1.7.2"
+    }
+  }
+  
