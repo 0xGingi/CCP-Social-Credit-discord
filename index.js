@@ -72,8 +72,6 @@ client.on('interactionCreate', async interaction => {
     } else if (commandName === 'gaslight') { 
         const neg = ['What the fuck are you talking about', 'You are a fucking idiot', 'Not it is not', 'I love you and I will never leave you']; 
         const response = neg[Math.floor(Math.random() * neg.length)]; await interaction.reply(response);
-    } else if (commandName === 'join') { 
-        await interaction.reply('Join the voice channel and reclaim the glory of the CCP or you will be sent to a social reeducation camp immediately'); 
     } else if (commandName === 'good_citizen') { 
         await interaction.reply('Good Citizen! 好公民'); 
     } else if (commandName === 'bad_citizen') {
