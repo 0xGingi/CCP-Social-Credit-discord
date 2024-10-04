@@ -31,11 +31,18 @@ const commands = [
     new SlashCommandBuilder().setName('lord_gaben').setDescription('our holy savior'),
 ].map(command => command.toJSON());
 
-const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN);
+const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
 
 (async () => {
     try {
         console.log('Started refreshing application (/) commands.');
+
+        await rest.put(
+            Routes.applicationCommands(process.env.DISCORD_ID),
+            { body: [] },
+        );
+
+        console.log('Successfully deleted all application commands.');
 
         await rest.put(
             Routes.applicationCommands(process.env.DISCORD_ID),
