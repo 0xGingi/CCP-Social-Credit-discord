@@ -9,13 +9,14 @@ docker pull 0xgingi/ccp-social-credit-discord:latest
 docker run -d --name ccp --restart=always -v ~/ccp:/app/config 0xgingi/ccp-social-credit-discord:latest
 ```
 
-## Installation (Ubuntu Server):
+## Installation:
 ```
+curl -fsSL https://bun.sh/install | bash
 git clone https://github.com/0xGingi/CCP-Social-Credit-discord
 ```
 ```
 cd CCP-Social-Credit-discord
-npm i
+bun install
 ```
 Add Your Discord Bot Secret Token and your Discord ID:
 
