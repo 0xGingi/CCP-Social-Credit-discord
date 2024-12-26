@@ -24,23 +24,25 @@ const commands = [
     new SlashCommandBuilder().setName('reeducation').setDescription('Please report to the nearest reeducation camp immediately'),
     new SlashCommandBuilder().setName('eatbug').setDescription('Eat the bug. Yum Yum.'),
     new SlashCommandBuilder().setName('gaslight').setDescription('Gaslight'),
-    new SlashCommandBuilder().setName('save').setDescription('Remind Jacob to Save Sharepoint'),
-    new SlashCommandBuilder().setName('modbot').setDescription('ModBot'),
-    new SlashCommandBuilder().setName('join').setDescription('Join Voice and reclaim the glory of the CCP'),
     new SlashCommandBuilder().setName('good_citizen').setDescription('recognize good citizen'),
-    new SlashCommandBuilder().setName('cum').setDescription('cum'),
     new SlashCommandBuilder().setName('bad_citizen').setDescription('recognize bad citizen'),
     new SlashCommandBuilder().setName('good_words').setDescription('Good Words'),
     new SlashCommandBuilder().setName('bad_words').setDescription('Bad Words'),
     new SlashCommandBuilder().setName('lord_gaben').setDescription('our holy savior'),
-    new SlashCommandBuilder().setName('ultra').setDescription('ultra stats'),
 ].map(command => command.toJSON());
 
-const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN);
+const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
 
 (async () => {
     try {
         console.log('Started refreshing application (/) commands.');
+
+        await rest.put(
+            Routes.applicationCommands(process.env.DISCORD_ID),
+            { body: [] },
+        );
+
+        console.log('Successfully deleted all application commands.');
 
         await rest.put(
             Routes.applicationCommands(process.env.DISCORD_ID),
@@ -77,16 +79,8 @@ client.on('interactionCreate', async interaction => {
     } else if (commandName === 'gaslight') { 
         const neg = ['What the fuck are you talking about', 'You are a fucking idiot', 'Not it is not', 'I love you and I will never leave you']; 
         const response = neg[Math.floor(Math.random() * neg.length)]; await interaction.reply(response);
-    } else if (commandName === 'save') {
-        await interaction.reply('Reminding Jacob to Save Sharepoint'); 
-    } else if (commandName === 'modbot') { 
-        await interaction.reply('Mod Bot: Shut the fuck up'); 
-    } else if (commandName === 'join') { 
-        await interaction.reply('Join the voice channel and reclaim the glory of the CCP or you will be sent to a social reeducation camp immediately'); 
     } else if (commandName === 'good_citizen') { 
         await interaction.reply('Good Citizen! 好公民'); 
-    } else if (commandName === 'cum') { 
-        await interaction.reply('Cum! Yum Yum! 暨！ 好吃！'); 
     } else if (commandName === 'bad_citizen') {
         await interaction.reply('坏公民 请立即到离你最近的劳教所报到 坏公民'); 
     } else if (commandName === 'good_words') { 
@@ -111,27 +105,6 @@ client.on('interactionCreate', async interaction => {
             '⣿⣿⣿⣿⣿⠟⠋⠄⠄⠄⠄⠄⠄⠈⠛⠿⠿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠄\n' +
             '⣿⠿⠛⠉⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠘⠿⢿⣿⣿⣿⣿⣿⠿⠋⠄⠄⠄⠄' +
             '```');
-    }
-    else if (commandName === 'ultra') {
-        const headers = {
-            'Authorization': 'Bearer ' + process.env.ULTRA_TOKEN
-        }
-        try {
-            const response = await axios.get(process.env.ULTRA_URL, { headers });
-
-            const fs = response.data.service_stats_info.free_storage_gb;
-            const ts = response.data.service_stats_info.total_storage_value;
-            const us = response.data.service_stats_info.used_storage_value;
-            const tu = response.data.service_stats_info.traffic_used_percentage;
-            const tr = response.data.service_stats_info.last_traffic_reset;
-            const tn = response.data.service_stats_info.next_traffic_reset;
-            const ta = response.data.service_stats_info.traffic_available_percentage;
-
-            await interaction.reply(`**ULTRA.CC STATS** \n Free Storage: **${fs}** **GB** \n Used Storage:  **${us} GB** \n Total Storage: **${ts} GB** \n Traffic Used: **${tu}%** \n Traffic Available: **${ta}%** \n Last Traffic Reset: **${tr}** \n Next Traffic Reset: **${tn}**`);
-        } catch (error) {
-            console.error(error);
-            await interaction.reply('An error occurred while fetching the stats.');
-        }
     }
     });
 
